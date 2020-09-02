@@ -8,49 +8,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    depends_on:
-      - minio
-      - db
     ports:
       - "8080:8080"
-    env_file: mysql.env
-    environment:
-      TESTING_NOAUTH: ${TESTING_NOAUTH}
-      s3Endpoint: ${s3Endpoint}
-      s3accessKeyID: ${s3accessKeyID} 
-      s3secretAccessKey: ${s3secretAccessKey} 
-      s3bucket: ${s3bucket}
-      tokenInfoEndpoint: ${tokenInfoEndpoint}
-      tokenInfoUser: ${tokenInfoUser} 
-      tokenInfoPassword: ${tokenInfoPassword}
-    
-
-
-  minio:
-    image: minio/minio:latest
-    volumes:
-      - sage-data:/data
-    ports:
-      - "9001:9000"
-    environment:
-      MINIO_ACCESS_KEY: minio
-      MINIO_SECRET_KEY: minio123
-    command: server /data
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-
-  db:
-    image: mysql:8
-    env_file: mysql.env
-   
-    volumes:
-      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - stage-storage-db:/var/lib/mysql
-
-volumes:
-  sage-data:
-  stage-storage-db:
-    

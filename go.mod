@@ -1,4 +1,4 @@
-module github.com/sagecontinuum/sage-storage-api
+module github.com/sagecontinuum/sage-ses
 
 go 1.13
 
