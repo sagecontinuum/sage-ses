@@ -1,0 +1,49 @@
+#kubectl create configmap sage-storage-db-initdb-config --from-file=init.sql
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sage-storage-db
+  namespace: sage
+  labels:
+    app: sage-storage-db
+spec:
+  selector:
+    k8s-app: sage-storage-db
+  type: ClusterIP
+  ports:
+  - name: sage-storage-db
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sage-storage-api
+  namespace: sage
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: ""
+spec:
+  rules:
+  - host: sage-storage-api.nautilus.optiputer.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sage-storage-api
+          servicePort: 8080
+
