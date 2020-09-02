@@ -4,7 +4,7 @@ version: '3.7'
 services:
 
   sage-api:
-    image: sagecontinuum/sage-storage-api:latest
+    image: sagecontinuum/ses-api:latest
     build:
       context: .
       dockerfile: Dockerfile
