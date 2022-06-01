@@ -1,3 +1,5 @@
+# _This repo is archived._
+
 # sage-ses
 SAGE Edge Scheduler
 
