@@ -1,4 +1,4 @@
-# _This repo is archived._
+# _This repo is archived. See http://github.com/waggle-sensor/edge-scheduler_
 
 # sage-ses
 SAGE Edge Scheduler
